@@ -13,20 +13,45 @@ Subscribe a slack bot to the last topic to send a message in slack channel if an
 
 
 To run
-Usage:
-First train the anomaly detection model, run the file:
+
+# Usage:
+
+* First train the anomaly detection model, run the file:
+
+```bash
 model/train.py
-Create the required topics
+```
+
+* Create the required topics
+
+```bash
 kafka-topics.sh --zookeeper localhost:2181 --topic transactions --create --partitions 3 --replication-factor 1
 kafka-topics.sh --zookeeper localhost:2181 --topic anomalies --create --partitions 3 --replication-factor 1
-Check the topics are created
+```
+
+* Check the topics are created
+
+```bash
 kafka-topics.sh --zookeeper localhost:2181 --list
-Check file settings.py and edit the variables if needed
+```
 
-Start the producer, run the file
+* Check file **settings.py** and edit the variables if needed
 
+* Start the producer, run the file
+
+```bash
 streaming/producer.py
-Start the anomalies detector, run the file
+```
+
+* Start the anomalies detector, run the file
+
+```bash
 streaming/anomalies_detector.py
-Start sending alerts to Slack, make sure to register the env variable SLACK_API_TOKEN, then run
+```
+
+* Start sending alerts to Slack, make sure to register the env variable SLACK_API_TOKEN,
+then run
+
+```bash
 streaming/bot_alerts.py
+```
